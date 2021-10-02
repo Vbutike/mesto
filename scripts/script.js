@@ -21,8 +21,8 @@ const form = modalWindow.querySelector('.popup__input');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     console.log(e);
-    let nameInput = modalWindow.querySelector('.input__text_type_name');
-    let jobInput = modalWindow.querySelector('.input__text_type_comment');
+    let nameInput = modalWindow.querySelector('.popup__input-text_type_name');
+    let jobInput = modalWindow.querySelector('.popup__input-text_type_comment');
     let nameprofile = document.querySelector('.profile__name');
     let comentprofile = document.querySelector('.profile__coment');
     nameprofile.textContent = nameInput.value;
