@@ -2,30 +2,37 @@ const modalWindow = document.querySelector('.popup');
 const modalWindowCloseBtn = modalWindow.querySelector('.popup__close');
 const aboutProjectLink = document.querySelector('.profile__edit-button');
 
-function editProfileWindow() {
-modalWindow.classList.toggle('popup_is-opened');
+function openModalWindow() {
+    modalWindow.classList.remove('popup_is-close')
+    modalWindow.classList.add('popup_is-opened')
 }
 
-aboutProjectLink.addEventListener('click', editProfileWindow);
-modalWindowCloseBtn.addEventListener('click', editProfileWindow);
+function closeModalWindow() {
+    modalWindow.classList.add('popup_is-close')
+}
+
+aboutProjectLink.addEventListener('click', openModalWindow);
+modalWindowCloseBtn.addEventListener('click', closeModalWindow);
 
 function onOverlayClick(e) {
     if (e.target === e.currentTarget) {
-        editProfileWindow();
+        closeModalWindow();
     }
 }
 
 modalWindow.addEventListener('click', onOverlayClick);
 
+let nameInput = modalWindow.querySelector('.popup__input-text_type_name');
+let jobInput = modalWindow.querySelector('.popup__input-text_type_comment');
+let nameprofile = document.querySelector('.profile__name');
+let comentprofile = document.querySelector('.profile__coment');
 const form = modalWindow.querySelector('.popup__input');
-form.addEventListener('submit', function (e) {
+
+function exchange (e) {
     e.preventDefault();
-    console.log(e);
-    let nameInput = modalWindow.querySelector('.popup__input-text_type_name');
-    let jobInput = modalWindow.querySelector('.popup__input-text_type_comment');
-    let nameprofile = document.querySelector('.profile__name');
-    let comentprofile = document.querySelector('.profile__coment');
     nameprofile.textContent = nameInput.value;
     comentprofile.textContent = jobInput.value;
-    editProfileWindow();
-});
+    closeModalWindow();
+}
+
+form.addEventListener('submit',exchange); 

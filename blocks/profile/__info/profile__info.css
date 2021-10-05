@@ -2,6 +2,7 @@
   margin: 22px 0 25px 30px;
   display: grid;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
+  
   align-self: center;
   box-sizing: border-box;
 }
