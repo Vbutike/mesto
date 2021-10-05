@@ -17,7 +17,6 @@
 
 @import url("../blocks/element/element.css");
 @import url("../blocks/element/__description/element__description.css");
-@import url("../blocks/element/__description-like-container/element__description-like-container.css");
 @import url("../blocks/element/__image/element__image.css");
 @import url("../blocks/element/__like-button/element__like-button.css");
 @import url("../blocks/element/__title/element__title.css");
