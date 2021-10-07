@@ -8,7 +8,7 @@
   border: 1px solid #fff;
   background-color: #000;
   transition: opacity .2s ease;
-  background: url(/images/edit_button.svg) no-repeat center;
+  background: url(../../../images/edit_button.svg) no-repeat center;
   background-size: 10px 10px;
 
   
