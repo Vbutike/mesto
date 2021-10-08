@@ -90,12 +90,11 @@
 
     <div class="popup">
         <div class="popup__container">
-            <button class="popup__close"></button>
+            <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
-            <form class="popup__input">
-                <input type="text" placeholder="Жак-Ив Кусто" class="popup__input-text popup__input-text_type_name">
-                <input type="text" placeholder="Исследователь океана"
-                    class="popup__input-text popup__input-text_type_comment">
+            <form class="popup__input" name="User-info">
+                <input type="text" placeholder="Жак-Ив Кусто" class="popup__input-text popup__input-text_type_name" name="User-name">
+                <input type="text" placeholder="Исследователь океана" class="popup__input-text popup__input-text_type_comment" name="User-comment">
                 <button type="submit" class="popup__submit-btn">Сохранить</button>
             </form>
         </div>

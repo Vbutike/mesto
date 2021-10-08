@@ -1,5 +1,5 @@
 .popup {
-  display:none;
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -11,10 +11,6 @@
   transition: visibility .4s, opacity .5s linear;
 }
 
-.popup_is-opened {
+.popup_opened {
   display: flex;
-}  
-
-.popup_is-close {
-  display: none;
-}  
+}
