@@ -1,0 +1,15 @@
+.popup__title-picture {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 10px 0 0;
+    color: #FFFFFF;;
+    }
+
+@media screen and (max-width: 320px) {
+  .popup__title-picture {
+    max-width: 240px;
+   }
+}

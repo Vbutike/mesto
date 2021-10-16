@@ -1,0 +1,23 @@
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0, .5);
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity .25s linear;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup_type_picture {
+  background-color: rgba(0,0,0, .9);
+}

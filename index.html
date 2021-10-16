@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <div class="header__logo"></div>
+    </header>
+    <main class="content">
+
+        <section class="profile">
+            <img class="profile__avatar" src="images/ava.jpg" alt="ава">
+
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button class="profile__edit-button" type="button"> </button>
+                <p class="profile__coment">Исследователь океана</p>
+            </div>
+            <button class="profile__add-button" type="button"></button>
+        </section>
+
+        <section class="elements-container">
+            <ul class="elements"></ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup_type_edit">
+        <div class="popup__container">
+            <button class="popup__close popup__close-editprofil" type="button"></button>
+            <form class="popup__form" name="User-info">
+                <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
+                <input type="text" class="popup__input-text popup__input-text_type_name" name="User-name">
+                <input type="text" class="popup__input-text popup__input-text_type_comment" name="User-comment">
+                <button type="submit" class="popup__submit-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_type_new-card">
+        <div class="popup__container">
+            <button class="popup__close popup__close-card" type="button"></button>
+            <form class="popup__form" name="User-info">
+                <h2 class="popup__title">Новое&nbsp;место</h2>
+                <input type="text" placeholder="Название" class="popup__input-text popup__input-text_type_namemesto"
+                    name="name">
+                <input type="url" placeholder="Ссылка на катинку" class="popup__input-text popup__input-text_type_url"
+                    name="link">
+                <button type="submit" class="popup__submit-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_type_picture">
+        <div class="popup__container-picture">
+            <button class="popup__close popup__close-picture" type="button"></button>
+            <img class="popup__picture" src="#" alt="#">
+            <h2 class="popup__title-picture"></h2>
+
+        </div>
+    </div>
+
+    <template id="element-template">
+        <li class="element">
+            <button class="element__trash-btn" type="button"></button>
+            <img class="element__image" alt="#" src="#">
+            <div class="element__description">
+                <h3 class="element__title"></h3>
+                <button class="element__like-button" type="button" aria-label="нравится"></button>
+            </div>
+        </li>
+    </template>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
