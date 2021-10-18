@@ -1,10 +1,37 @@
+// Масив изначальных Карточек
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
 const windowEditProfil = document.querySelector('.popup_type_edit');
 const editButton = document.querySelector('.profile__edit-button');
 const nameInput = windowEditProfil.querySelector('.popup__input-text_type_name');
 const commentInput = windowEditProfil.querySelector('.popup__input-text_type_comment');
 const nameProfile = document.querySelector('.profile__name');
 const comentProfile = document.querySelector('.profile__coment');
-const form = windowEditProfil.querySelector('.popup__form');
+const formProfile = windowEditProfil.querySelector('.popup__form');
 const modalWindowCloseBtn = document.querySelector('.popup__close-editprofil');
 const windowAddCard = document.querySelector('.popup_type_new-card');
 const cardWindowCloseBtn = windowAddCard.querySelector('.popup__close-card');
@@ -18,30 +45,7 @@ const windowPicture = document.querySelector('.popup_type_picture')
 const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture');
 const pictureOpen = windowPicture.querySelector('.popup__picture')
 const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
-///////////////////////////////// СЛУШАТЕЛИ //////////////////////////////////////////
-//слушатели на клик мимо попапа
-windowEditProfil.addEventListener('click', onOverlayClick);
-windowAddCard.addEventListener('click', onOverlayClick);
-windowPicture.addEventListener('click', onOverlayClick);
-// Добавление новых карточек
-formAddCard.addEventListener('submit', createNewCard);
 
-// слушатель на нажатие кнопки 'Сохранить'
-form.addEventListener('submit',exchange);
-
-//слушаем нажатие на конпку для открытия попапов 
-editButton.addEventListener('click', openWindowEditProfil);
-addButton.addEventListener('click', openwindowAddCard);
-// Слушатели на кнопку закрытия попапов
-
-pictureWindowCloseBtn.addEventListener('click',()=>  closePopup(windowPicture));
-modalWindowCloseBtn.addEventListener('click',()=>  closePopup(windowEditProfil));
-cardWindowCloseBtn.addEventListener('click',()=> closePopup(windowAddCard));
-
-// Добавление новых карточек
-formAddCard.addEventListener('submit', createNewCard);
-
-//////////////////////////////////////////////////////////////////////////////////////
 //Функция открытия попапов
 
 function openPopup(popup) {
@@ -61,7 +65,7 @@ function openWindowEditProfil() {
 }
 
 // Функция добавления на странницу инфо из попапа Редкатирования профиля
-function exchange (e) {
+function submitProfileForm (e) {
   e.preventDefault();
   nameProfile.textContent = nameInput.value;
   comentProfile.textContent = commentInput.value;
@@ -77,42 +81,14 @@ function openwindowAddCard() {
 
 ////////Закрытие Popup если клик по странице////////////////////////////////////
 function onOverlayClick(e) {
+  const openedPopup = document.querySelector('.popup_opened');
     if (e.target === e.currentTarget) {
-      closePopup(windowEditProfil);
-      closePopup(windowAddCard);
-      closePopup(windowPicture);
+      closePopup(openedPopup);
     };
 };
 //////////////////////////////////////////////////////////////////////////
 
-// Масив изначальных Карточек
 
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
   
  // Функция добавления в начало уже созданной карточки на страницу
 function addCard(whereAdd, templateElement) {
@@ -165,3 +141,27 @@ function createNewCard (evt) {
   addCard(cards, cardItem);
   closePopup(windowAddCard);
 };
+///////////////////////////////// СЛУШАТЕЛИ //////////////////////////////////////////
+//слушатели на клик мимо попапа
+windowEditProfil.addEventListener('click', onOverlayClick);
+windowAddCard.addEventListener('click', onOverlayClick);
+windowPicture.addEventListener('click', onOverlayClick);
+// Добавление новых карточек
+formAddCard.addEventListener('submit', createNewCard);
+
+// слушатель на нажатие кнопки 'Сохранить'
+formProfile.addEventListener('submit',submitProfileForm);
+
+//слушаем нажатие на конпку для открытия попапов 
+editButton.addEventListener('click', openWindowEditProfil);
+addButton.addEventListener('click', openwindowAddCard);
+// Слушатели на кнопку закрытия попапов
+
+pictureWindowCloseBtn.addEventListener('click',()=>  closePopup(windowPicture));
+modalWindowCloseBtn.addEventListener('click',()=>  closePopup(windowEditProfil));
+cardWindowCloseBtn.addEventListener('click',()=> closePopup(windowAddCard));
+
+// Добавление новых карточек
+formAddCard.addEventListener('submit', createNewCard);
+
+//////////////////////////////////////////////////////////////////////////////////////

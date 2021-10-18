@@ -10,7 +10,7 @@
 
 Реализована плавность открытия и закрытия попапов
 
-https://github.com/Vbutike/mesto
+https://vbutike.github.io/mesto/
 
 
 ### Обзор
