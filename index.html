@@ -12,7 +12,7 @@
 <body class="page">
     <header class="header">
         <img src="./images/Logo.svg" alt="лого" class="header__logo">
-        </header>
+    </header>
     <main class="content">
 
         <section class="profile">
@@ -37,10 +37,17 @@
     <div class="popup popup_type_edit">
         <div class="popup__container">
             <button class="popup__close popup__close-editprofil" type="button"></button>
-            <form class="popup__form" name="User-info">
+            <form class="popup__form" name="User-info" novalidate>
                 <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
-                <input type="text" class="popup__input-text popup__input-text_type_name" name="User-name">
-                <input type="text" class="popup__input-text popup__input-text_type_comment" name="User-comment">
+
+                <input id="popup__input-user-name" type="text" class="popup__input popup__input_type_name"
+                    name="popup__input-user-name" required minlength="2" maxlength="40">
+                <span class="popup__input-error popup__input-user-name-error"></span>
+
+                <input id="popup__input-user-comment" type="text" class="popup__input popup__input_type_comment"
+                    name="popup__input-user-comment" required minlength="2" maxlength="200">
+                <span class="popup__input-error popup__input-user-comment-error"></span>
+
                 <button type="submit" class="popup__submit-btn">Сохранить</button>
             </form>
         </div>
@@ -49,13 +56,16 @@
     <div class="popup popup_type_new-card">
         <div class="popup__container">
             <button class="popup__close popup__close-card" type="button"></button>
-            <form class="popup__form" name="Card-loading">
+            <form class="popup__form" name="Card-loading" novalidate>
                 <h2 class="popup__title">Новое&nbsp;место</h2>
-                <input type="text" placeholder="Название" class="popup__input-text popup__input-text_type_namemesto"
-                    name="name">
-                <input type="url" placeholder="Ссылка на катинку" class="popup__input-text popup__input-text_type_url"
-                    name="link">
-                <button type="submit" class="popup__submit-btn">Сохранить</button>
+                <input id="popup__input-card" type="text" placeholder="Название"
+                    class="popup__input popup__input_error_active popup__input_type_namemesto" required minlength="2"
+                    maxlength="30" name="place-name" value="">
+                <span class="popup__input-error popup__input-card-error"></span>
+                <input id="popup__input-link" type="url" placeholder="Ссылка на катинку"
+                    class="popup__input popup__input_error_active popup__input_type_url" required name="link" value="">
+                <span class="popup__input-error popup__input-link-error"></span>
+                <button disabled type="submit" class="popup__submit-btn popup__submit-btn_disabled">Сохранить</button>
             </form>
         </div>
     </div>
@@ -79,7 +89,8 @@
             </div>
         </li>
     </template>
-
+    <script src="scripts/validate.js"></script>
     <script src="scripts/script.js"></script>
 </body>
+
 </html>

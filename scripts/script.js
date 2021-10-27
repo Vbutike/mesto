@@ -27,8 +27,8 @@ const initialCards = [
 ]; 
 const windowEditProfil = document.querySelector('.popup_type_edit');
 const editButton = document.querySelector('.profile__edit-button');
-const nameInput = windowEditProfil.querySelector('.popup__input-text_type_name');
-const commentInput = windowEditProfil.querySelector('.popup__input-text_type_comment');
+const nameInput = windowEditProfil.querySelector('.popup__input_type_name');
+const commentInput = windowEditProfil.querySelector('.popup__input_type_comment');
 const nameProfile = document.querySelector('.profile__name');
 const comentProfile = document.querySelector('.profile__coment');
 const formProfile = windowEditProfil.querySelector('.popup__form');
@@ -37,8 +37,8 @@ const windowAddCard = document.querySelector('.popup_type_new-card');
 const cardWindowCloseBtn = windowAddCard.querySelector('.popup__close-card');
 const addButton = document.querySelector('.profile__add-button');
 const formAddCard = windowAddCard.querySelector('.popup__form');
-const nameInputMesto = windowAddCard.querySelector('.popup__input-text_type_namemesto');
-const inputUrl = windowAddCard.querySelector('.popup__input-text_type_url');
+const nameInputMesto = windowAddCard.querySelector('.popup__input_type_namemesto');
+const inputUrl = windowAddCard.querySelector('.popup__input_type_url');
 const cards = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
 const windowPicture = document.querySelector('.popup_type_picture')
@@ -53,7 +53,16 @@ function openPopup(popup) {
 }
 //Функция закрытия попапов
 function closePopup(popup) {
+  
+  //добавили в попап "добавление карточки" блокировку кнопки.
+  if (popup === windowAddCard) {
+  const buttonElement = windowAddCard.querySelector('.popup__submit-btn')
+  buttonElement.classList.add('popup__submit-btn_disabled');
+  buttonElement.setAttribute('disabled', 'disabled');
+  }
   popup.classList.remove('popup_opened');
+
+
 }
 
 //добавляем в форму действующие значения(имя и коментарий) и открываем попап  Редактирование профиля.
@@ -86,6 +95,14 @@ function onOverlayClick(e) {
       closePopup(openedPopup);
     };
 };
+
+// Функция закрытия попапов по клавише ECS
+function closePopupOnEsc(e) {
+  const openedPopup = document.querySelector('.popup_opened');
+    if(e.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -164,4 +181,7 @@ cardWindowCloseBtn.addEventListener('click',()=> closePopup(windowAddCard));
 // Добавление новых карточек
 formAddCard.addEventListener('submit', createNewCard);
 
+// Закрытие попапов по клавише ECS
+document.addEventListener('keydown', closePopupOnEsc)
 //////////////////////////////////////////////////////////////////////////////////////
+

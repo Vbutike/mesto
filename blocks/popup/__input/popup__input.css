@@ -1,16 +1,20 @@
-.popup__input-text {
+.popup__input {
   border: 0;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
-  max-width: 358px;
   min-height: 27px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0 0 13px;
-  margin-bottom: 30px;
+  margin: 0 auto;
+  padding: 10px 0;
   box-sizing: border-box;
+  width: 100%;
 }
 
-.popup__input-text::-webkit-input-placeholder {
+.popup__input::-webkit-input-placeholder {
   color: black;
 }
+
+/* .popup__input:invalid {
+  border-bottom: 1px solid #FF0000;
+}  */
