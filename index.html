@@ -58,13 +58,16 @@
             <button class="popup__close popup__close-card" type="button"></button>
             <form class="popup__form" name="Card-loading" novalidate>
                 <h2 class="popup__title">Новое&nbsp;место</h2>
+
                 <input id="popup__input-card" type="text" placeholder="Название"
-                    class="popup__input popup__input_error_active popup__input_type_namemesto" required minlength="2"
+                    class="popup__input popup__input_type_namemesto" required minlength="2"
                     maxlength="30" name="place-name" value="">
                 <span class="popup__input-error popup__input-card-error"></span>
+
                 <input id="popup__input-link" type="url" placeholder="Ссылка на катинку"
-                    class="popup__input popup__input_error_active popup__input_type_url" required name="link" value="">
+                    class="popup__input popup__input_type_url" required name="link" value="">
                 <span class="popup__input-error popup__input-link-error"></span>
+
                 <button disabled type="submit" class="popup__submit-btn popup__submit-btn_disabled">Сохранить</button>
             </form>
         </div>

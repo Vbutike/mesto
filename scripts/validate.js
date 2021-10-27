@@ -1,7 +1,6 @@
 // Объявляем функцию появления ошибки ввода
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    console.log(formElement);
     inputElement.classList.add('popup__input_error_active');
     errorElement.textContent = errorMessage;
     errorElement.classList.add('popup__input-error_active');
