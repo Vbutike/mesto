@@ -45,23 +45,16 @@ const windowPicture = document.querySelector('.popup_type_picture')
 const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture');
 const pictureOpen = windowPicture.querySelector('.popup__picture')
 const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
-
 //Функция открытия попапов
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupOnEsc);
 }
 //Функция закрытия попапов
 function closePopup(popup) {
-  
-  //добавили в попап "добавление карточки" блокировку кнопки.
-  if (popup === windowAddCard) {
-  const buttonElement = windowAddCard.querySelector('.popup__submit-btn')
-  buttonElement.classList.add('popup__submit-btn_disabled');
-  buttonElement.setAttribute('disabled', 'disabled');
-  }
   popup.classList.remove('popup_opened');
-
+  document.removeEventListener('keydown', closePopupOnEsc);
 
 }
 
@@ -86,26 +79,28 @@ function openwindowAddCard() {
   nameInputMesto.value="";
   inputUrl.value="";
   openPopup(windowAddCard);
- }
+  
+  //добавили в попап "добавление карточки" блокировку кнопки.
+  const buttonElement = windowAddCard.querySelector('.popup__submit-btn')
+  buttonElement.classList.add('popup__submit-btn_disabled');
+  buttonElement.setAttribute('disabled', 'disabled');
+}
 
 ////////Закрытие Popup если клик по странице////////////////////////////////////
 function onOverlayClick(e) {
-  const openedPopup = document.querySelector('.popup_opened');
     if (e.target === e.currentTarget) {
-      closePopup(openedPopup);
-    };
+    closePopup(e.currentTarget);
+  };
 };
 
 // Функция закрытия попапов по клавише ECS
 function closePopupOnEsc(e) {
-  const openedPopup = document.querySelector('.popup_opened');
-    if(e.key === 'Escape') {
+     if(e.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 //////////////////////////////////////////////////////////////////////////
-
-
   
  // Функция добавления в начало уже созданной карточки на страницу
 function addCard(whereAdd, templateElement) {
@@ -113,47 +108,48 @@ function addCard(whereAdd, templateElement) {
 };
 
 // Функция создания карточки
-function createCard(titleCard, linkCardImg, templateElement) {
-  templateElement.querySelector('.element__title').textContent = titleCard;
-  templateElement.querySelector('.element__image').src = linkCardImg;
-  templateElement.querySelector('.element__image').alt = titleCard;
+function createCard(titleCard, linkCardImg) {
+  const cardItem = templateElement.querySelector('.element').cloneNode(true);
+  cardItem.querySelector('.element__title').textContent = titleCard;
+  cardItem.querySelector('.element__image').src = linkCardImg;
+  cardItem.querySelector('.element__image').alt = titleCard;
 
 //Лайк
-const likeBtn = templateElement.querySelector('.element__like-button');
-likeBtn.addEventListener('click', function(evt) {
+cardItem.querySelector('.element__like-button').addEventListener('click', function(evt) {
 const eventTarget = evt.target;
 eventTarget.classList.toggle('element__like-button_active');
 });
 
  // Функция удаления карточки
  function delCard() {
-  templateElement.remove();
+  cardItem.remove();
 };
 
 //Ставим слушатель на картинку в карточке, после клика запускаем функцию открытия попапа с картинкой.
-templateElement.querySelector('.element__image').addEventListener('click', ()=> {
+cardItem.querySelector('.element__image').addEventListener('click', ()=> {
   openPopup(windowPicture);
-  pictureOpenTitle.alt = templateElement.querySelector('.element__title').textContent;
-  pictureOpenTitle.textContent = templateElement.querySelector('.element__title').textContent;
-  pictureOpen.src = templateElement.querySelector('.element__image').src;
+  pictureOpenTitle.alt = titleCard
+  pictureOpenTitle.textContent = titleCard
+  pictureOpen.src = linkCardImg
   });
 
 //Находим кнопку удаление карты и ставим слушатель
-const delBtn = templateElement.querySelector('.element__trash-btn');
-delBtn.addEventListener('click', delCard);
+cardItem.querySelector('.element__trash-btn').addEventListener('click', delCard);
+
+return cardItem;
+
 };
 
 // из готового масива initialCards формируем и добавляем на страницу массив карточек.
 initialCards.forEach(function(item) {
-  const cardItem = templateElement.querySelector('.element').cloneNode(true);
-  createCard(item.name, item.link, cardItem);
+  const cardItem = createCard(item.name, item.link);
   addCard(cards, cardItem);
 });
+
 
 // Формируем новую карточку входные данные из попапа добавления карточки и добавляем ее на страницу
 function createNewCard (evt) {
   evt.preventDefault();
-  const cardItem = templateElement.querySelector('.element').cloneNode(true);
   createCard(nameInputMesto.value, inputUrl.value, cardItem);
   addCard(cards, cardItem);
   closePopup(windowAddCard);
@@ -180,8 +176,4 @@ cardWindowCloseBtn.addEventListener('click',()=> closePopup(windowAddCard));
 
 // Добавление новых карточек
 formAddCard.addEventListener('submit', createNewCard);
-
-// Закрытие попапов по клавише ECS
-document.addEventListener('keydown', closePopupOnEsc)
 //////////////////////////////////////////////////////////////////////////////////////
-
