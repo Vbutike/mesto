@@ -135,23 +135,20 @@ cardItem.querySelector('.element__image').addEventListener('click', ()=> {
 
 //Находим кнопку удаление карты и ставим слушатель
 cardItem.querySelector('.element__trash-btn').addEventListener('click', delCard);
-
 return cardItem;
 
 };
 
 // из готового масива initialCards формируем и добавляем на страницу массив карточек.
 initialCards.forEach(function(item) {
-  const cardItem = createCard(item.name, item.link);
-  addCard(cards, cardItem);
+  addCard(cards, createCard(item.name, item.link));
 });
 
 
 // Формируем новую карточку входные данные из попапа добавления карточки и добавляем ее на страницу
 function createNewCard (evt) {
   evt.preventDefault();
-  createCard(nameInputMesto.value, inputUrl.value, cardItem);
-  addCard(cards, cardItem);
+  addCard(cards, createCard(nameInputMesto.value, inputUrl.value));
   closePopup(windowAddCard);
 };
 ///////////////////////////////// СЛУШАТЕЛИ //////////////////////////////////////////
