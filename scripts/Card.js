@@ -1,15 +1,10 @@
-// import {pictureWindowCloseBtn, windowPicture, pictureOpenTitle, pictureOpen } from './script.js'
-const windowPicture = document.querySelector('.popup_type_picture');
-const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture');
-const pictureOpen = windowPicture.querySelector('.popup__picture');
-const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
-
 export class Card {
   
   constructor(data, cardSelector) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
+    this._popup = document.querySelector('.popup_type_picture');
   }
 
   _getTemplate() {
@@ -22,12 +17,16 @@ export class Card {
     return cardElement;
   }
 
-  _handleOpenPopup() {
-    pictureOpenTitle.alt = this._title
-    pictureOpenTitle.textContent = this._title
-    pictureOpen.src = this._image;
-    
-    windowPicture.classList.add('popup_opened');
+  _handleCardClick() {
+    this._popup.querySelector('.popup__picture').src = this._element.querySelector('.element__image').src;
+    this._popup.querySelector('.popup__picture').alt = this._element.querySelector('.element__title').alt;
+    this._popup.querySelector('.popup__title-picture').textContent = this._element.querySelector('.element__title').textContent;
+    this._popup.classList.add('popup_opened');
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape') {
+        this._popup.classList.remove('popup_opened');
+      } 
+    });
   }
 
   _handleClosePopup() {
@@ -43,14 +42,10 @@ export class Card {
     //Кнопка удалить карточку
     this._element.querySelector('.element__trash-btn').addEventListener('click', this._hadnleDeletCard.bind(this));
     //Слушатель на картинке для открытие попапа с картинкой
-    this._element.querySelector('.element__image').addEventListener('click', () => {this._handleOpenPopup();
+    this._element.querySelector('.element__image').addEventListener('click', () => {this._handleCardClick();
     });
 
-    pictureWindowCloseBtn.addEventListener('click', () => {
-      this._handleClosePopup();
-    });
-
-    this._element.querySelector('.element__like-button').addEventListener('click', function(evt) {
+      this._element.querySelector('.element__like-button').addEventListener('click', function(evt) {
       const eventTarget = evt.target;
       eventTarget.classList.toggle('element__like-button_active');
       });
