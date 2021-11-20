@@ -51,6 +51,8 @@ const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture
 // const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
 //Функция открытия попапов
 
+let PopupNewCardValidation = undefined
+
 const enableValidation = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -91,12 +93,8 @@ function submitProfileForm (e) {
 function openwindowAddCard() {
   nameInputMesto.value="";
   inputUrl.value="";
+  PopupNewCardValidation.toggleButtonState();
   openPopup(windowAddCard);
-  
-//добавили в попап "добавление карточки" блокировку кнопки.
-  const buttonElement = windowAddCard.querySelector('.popup__submit-btn')
-  buttonElement.classList.add('popup__submit-btn_disabled');
-  buttonElement.setAttribute('disabled', 'disabled');
 }
 
 ////////Закрытие Popup если клик по странице////////////////////////////////////
@@ -120,42 +118,7 @@ function addCard(whereAdd, templateElement) {
   whereAdd.prepend(templateElement);
 };
 
-// Функция создания карточки
-// function createCard(titleCard, linkCardImg) {
-//   const cardItem = templateElement.querySelector('.element').cloneNode(true);
-//   cardItem.querySelector('.element__title').textContent = titleCard;
-//   cardItem.querySelector('.element__image').src = linkCardImg;
-//   cardItem.querySelector('.element__image').alt = titleCard;
 
-// //Лайк
-// cardItem.querySelector('.element__like-button').addEventListener('click', function(evt) {
-// const eventTarget = evt.target;
-// eventTarget.classList.toggle('element__like-button_active');
-// });
-
-//  // Функция удаления карточки
-//  function delCard() {
-//   cardItem.remove();
-// };
-
-// //Ставим слушатель на картинку в карточке, после клика запускаем функцию открытия попапа с картинкой.
-// cardItem.querySelector('.element__image').addEventListener('click', ()=> {
-//   openPopup(windowPicture);
-//   pictureOpenTitle.alt = titleCard
-//   pictureOpenTitle.textContent = titleCard
-//   pictureOpen.src = linkCardImg
-//   });
-
-// //Находим кнопку удаление карты и ставим слушатель
-// cardItem.querySelector('.element__trash-btn').addEventListener('click', delCard);
-// return cardItem;
-
-// };
-
-// //из готового масива initialCards формируем и добавляем на страницу массив карточек.
-// initialCards.forEach(function(item) {
-//   addCard(cards, createCard(item.name, item.link));
-// });
 function createCard (item) {
   const card = new Card(item, '.element-template');
   const cardElement = card.generateCard();
@@ -203,7 +166,7 @@ const enableFormValidation = () => {
   const PopupEditProfilValidation = new FormValidator(enableValidation, windowEditProfil)
   PopupEditProfilValidation.enableValidation()
 
-  const PopupNewCardValidation = new FormValidator(enableValidation, windowAddCard)
+  PopupNewCardValidation = new FormValidator(enableValidation, windowAddCard)
   PopupNewCardValidation.enableValidation()
 };
 enableFormValidation();
