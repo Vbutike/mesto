@@ -1,7 +1,7 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 // export { pictureWindowCloseBtn,windowPicture,pictureOpenTitle, pictureOpen };
-
+import {openPopup, closePopup, onOverlayClick} from './utils.js';
 // Масив изначальных Карточек
 const initialCards = [
   {
@@ -49,6 +49,7 @@ const windowPicture = document.querySelector('.popup_type_picture');
 const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture');
 // const pictureOpen = windowPicture.querySelector('.popup__picture');
 // const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
+
 //Функция открытия попапов
 
 let PopupNewCardValidation = undefined
@@ -61,18 +62,6 @@ const enableValidation = {
   inputErrorClass: 'popup__input_error_active',
   errorClass: 'popup__input-error_active'
 }; 
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupOnEsc);
-}
-
-//Функция закрытия попапов
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupOnEsc);
-
-}
 
 //добавляем в форму действующие значения(имя и коментарий) и открываем попап  Редактирование профиля.
 function openWindowEditProfil() {
@@ -97,22 +86,7 @@ function openwindowAddCard() {
   openPopup(windowAddCard);
 }
 
-////////Закрытие Popup если клик по странице////////////////////////////////////
-function onOverlayClick(e) {
-    if (e.target === e.currentTarget) {
-    closePopup(e.currentTarget);
-  };
-};
-
-// Функция закрытия попапов по клавише ECS
-function closePopupOnEsc(e) {
-     if(e.key === 'Escape') {
-       const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
 //////////////////////////////////////////////////////////////////////////
-  
 // Функция добавления в начало уже созданной карточки на страницу
 function addCard(whereAdd, templateElement) {
   whereAdd.prepend(templateElement);
@@ -142,20 +116,17 @@ windowAddCard.addEventListener('click', onOverlayClick);
 windowPicture.addEventListener('click', onOverlayClick);
 // Добавление новых карточек
 formAddCard.addEventListener('submit', createNewCard);
-
 // слушатель на нажатие кнопки 'Сохранить'
 formProfile.addEventListener('submit',submitProfileForm);
-
 //слушаем нажатие на конпку для открытия попапов 
 editButton.addEventListener('click', openWindowEditProfil);
 addButton.addEventListener('click', openwindowAddCard);
 // Слушатели на кнопку закрытия попапов
-
 pictureWindowCloseBtn.addEventListener('click',()=>  closePopup(windowPicture));
 modalWindowCloseBtn.addEventListener('click',()=>  closePopup(windowEditProfil));
 cardWindowCloseBtn.addEventListener('click',()=> closePopup(windowAddCard));
-
 //////////////////////////////////////////////////////////////////////////////////////
+
 initialCards.forEach((item) => {
   createCard (item);
 // Добавляем в DOM
@@ -169,4 +140,5 @@ const enableFormValidation = () => {
   PopupNewCardValidation = new FormValidator(enableValidation, windowAddCard)
   PopupNewCardValidation.enableValidation()
 };
+
 enableFormValidation();

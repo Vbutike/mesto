@@ -26,21 +26,21 @@ export class FormValidator {
         }
         this.toggleButtonState();
     }
-
-      //Функция рабочего состояния кнопки 
-
-    toggleButtonState() {
-            const btnActive = this._inputList.some((inputElement) => {
+    
+    _hasInvalidInput(inputList) {
+        return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
-        })
+        });
+    }
 
-        if (btnActive) {
+       toggleButtonState() {
+        if (this._hasInvalidInput(this._inputList)) {
             this._buttonElement.classList.add(this._inactiveButtonClass);
             this._buttonElement.setAttribute('disabled', 'disabled');
            
         } else {
             this._buttonElement.classList.remove(this._inactiveButtonClass);
-            this._buttonElement.removeAttribute('disabled', 'disabled'); 
+            this._buttonElement.removeAttribute('disabled'); 
         }
     };
 
