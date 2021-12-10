@@ -1,14 +1,11 @@
-import {openPopup} from './utils.js';
-const windowPicture = document.querySelector('.popup_type_picture');
-const pictureOpen = windowPicture.querySelector('.popup__picture');
-const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
-
-export class Card {
+export default class Card {
   
-  constructor(data, cardSelector) {
-    this._title = data.name;
-    this._image = data.link;
+  constructor({name,link, handleCardClick}, cardSelector) {
+    this._title = name;
+    this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
+    
   }
 
   _getTemplate() {
@@ -20,13 +17,6 @@ export class Card {
 
     return cardElement;
   }
-
-  _handleCardClick() {
-    pictureOpenTitle.alt = this._title
-    pictureOpenTitle.textContent = this._title
-    pictureOpen.src = this._image;
-    openPopup(windowPicture)
-   }
 
   _hadnleDeletCard(){
     this._element.remove(); 
@@ -47,10 +37,11 @@ export class Card {
   }
 
   generateCard() {
+    
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._image;
-    this._element.querySelector('.element__image').alt = this._image;
+    this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__image').alt = this._title;
     this._element.querySelector('.element__title').textContent = this._title;
     return this._element;
   }

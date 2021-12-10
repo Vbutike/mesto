@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
     constructor(objectSettings, formElement) {
         this._formElement = formElement;
         this._inputSelector = objectSettings.inputSelector;
@@ -70,4 +70,13 @@ export class FormValidator {
         });
         this._setEventListeners();
     }
+
+    resetValidation () {
+        this._inputList.forEach((inputElement) => {
+          const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+            this._hideInputError(errorElement, inputElement);
+          });
+        this._toggleButtonState();
+      }
+
 }

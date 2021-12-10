@@ -11,12 +11,12 @@
 
 <body class="page">
     <header class="header">
-        <img src="./images/Logo.svg" alt="лого" class="header__logo">
+        <img src="<%=require('./images/Logo.svg')%>" alt="лого" class="header__logo">
     </header>
     <main class="content">
 
         <section class="profile">
-            <img class="profile__avatar" src="images/ava.jpg" alt="ава">
+            <img class="profile__avatar" src="<%=require('./images/ava.jpg')%>" alt="ава">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button class="profile__edit-button" type="button"> </button>
@@ -61,7 +61,7 @@
 
                 <input id="popup__input-card" type="text" placeholder="Название"
                     class="popup__input popup__input_type_namemesto" required minlength="2"
-                    maxlength="30" name="place-name" value="">
+                    maxlength="30" name="name" value="">
                 <span class="popup__input-error popup__input-card-error"></span>
 
                 <input id="popup__input-link" type="url" placeholder="Ссылка на катинку"
@@ -95,7 +95,7 @@
     
     <!-- <script src="scripts/Card.js" type="module"></script> -->
     <!-- <script src="scripts/validate.js" type="module"></script> -->
-    <script src="scripts/script.js" type="module"></script>
+    <script src="./pages/index.js" type="module"></script>
     <!-- <script src="scripts/FormValidator.js" type="module"></script> -->
 </body>
 
