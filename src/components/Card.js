@@ -1,8 +1,7 @@
 export default class Card {
   
-  constructor({name,link, handleCardClick}, cardSelector) {
-    this._title = name;
-    this._link = link;
+  constructor({item, handleCardClick}, cardSelector) {
+    this._item = item;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     
@@ -26,7 +25,7 @@ export default class Card {
     //Кнопка удалить карточку
     this._element.querySelector('.element__trash-btn').addEventListener('click', this._hadnleDeletCard.bind(this));
     //Слушатель на картинке для открытие попапа с картинкой
-    this._element.querySelector('.element__image').addEventListener('click', () => {this._handleCardClick();
+    this._element.querySelector('.element__image').addEventListener('click', () => {this._handleCardClick(this._item);
     });
 
     this._element.querySelector('.element__like-button').addEventListener('click', function(evt) {
@@ -37,12 +36,14 @@ export default class Card {
   }
 
   generateCard() {
-    
+    const {name, link} = this._item
+    console.log(this._item)
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._title;
-    this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__image').src = link;
+    this._element.querySelector('.element__image').alt = name;
+    this._element.querySelector('.element__title').textContent = name;
+    
     return this._element;
   }
 }

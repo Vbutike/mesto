@@ -52,4 +52,4 @@ export const enableValidation = {
   export const windowPicture = document.querySelector('.popup_type_picture');
   export const pictureWindowCloseBtn = windowPicture.querySelector('.popup__close-picture');
   export const pictureOpen = windowPicture.querySelector('.popup__picture');
-  export const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture')
+  export const pictureOpenTitle = windowPicture.querySelector('.popup__title-picture');

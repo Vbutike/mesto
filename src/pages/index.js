@@ -22,21 +22,14 @@ const enableFormValidation = () => {
 };
 enableFormValidation();
 
-//попап с картинкой
-const popupImage = new PopupWithImage(windowPicture);
-popupImage.setEventListeners();
-
-//добавления новой карточки
-const addCardForm = new PopupWithForm(windowAddCard, {handleFormSubmit: (inputValues) =>{
-  createCard(inputValues);
-  
-}});
-addCardForm.setEventListeners();
+//Редактор профиля
+const profile = new UserInfo({nameSelector: nameProfile, commentSelector: comentProfile});
 
 // формируем  экземляр  Card 
-const createCard = (data) => {
-  const element = new Card({name:data.name, link:data.link, handleCardClick: () => {
-  popupImage.open({name:data.name, link:data.link});
+const createCard = (item) => {
+  const element = new Card({item, handleCardClick: (item) => {
+    console.log(item);
+  popupImage.open(item);
  }},'#element-template').generateCard();
  cardList.addItem(element);
 };
@@ -45,24 +38,37 @@ const createCard = (data) => {
 const cardList = new Section({items:initialCards, renderer: (item) =>{
   createCard(item);
 }}, '.elements');
+  
+//попап с картинкой
+const popupImage = new PopupWithImage(windowPicture);
+ popupImage.setEventListeners();
 
+//добавления новой карточки
+const addCardForm = new PopupWithForm(windowAddCard, (inputValues) =>{
+  createCard(inputValues);
+  });
+  addCardForm.setEventListeners();
+
+//редактор профиля
+const  profileForm = new PopupWithForm(windowEditProfil, (inputValues)=> {
+ 
+  profile.setUserInfo(inputValues);
+  });
+  profileForm.setEventListeners();
 
 //  Слушатель клика по кнопке добавления карточки
 addButton.addEventListener('click', () => {
   addCardForm.open();
 });
+
 // Слушатель на кнопке редактора профиля
 editButton.addEventListener('click', () => {
-  profile.getUserInfo();
+  const { name, about } = profile.getUserInfo();
+  nameInput.value = name;
+  commentInput.value = about;
+  // editFormValidator.resetValidation();
   profileForm.open();
 });
 
-
-//Редактор профиля
-const profile = new UserInfo({nameSelector:nameProfile, commentSelector:comentProfile});
-const  profileForm = new PopupWithForm(windowEditProfil, {handleFormSubmit: ()=>{
-profile.setUserInfo();
-}});
-profileForm.setEventListeners();
-
 cardList.renderItem();
+
