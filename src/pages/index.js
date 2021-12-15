@@ -23,13 +23,12 @@ const enableFormValidation = () => {
 enableFormValidation();
 
 //Редактор профиля
-const profile = new UserInfo({nameSelector: nameProfile, commentSelector: comentProfile});
+const profile = new UserInfo('.profile__name', '.profile__coment');
 
 // формируем  экземляр  Card 
 const createCard = (item) => {
   const element = new Card({item, handleCardClick: (item) => {
-    console.log(item);
-  popupImage.open(item);
+    popupImage.open(item);
  }},'#element-template').generateCard();
  cardList.addItem(element);
 };
